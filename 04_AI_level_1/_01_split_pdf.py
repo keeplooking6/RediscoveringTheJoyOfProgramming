@@ -1,3 +1,14 @@
+"""
+切割方式：
+1. 按页切割
+    - pages = loader.load_and_split()
+2. 按语义段落切割
+    - 将文档切分为 chunk_size 个字符的块，每个字符块之间会有chunk_overlap个字符重复，降低了分离了重要的上下文的可能性
+    - text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=200, chunk_overlap=50, add_start_index=True
+        )
+"""
+
 # 1. 导入所需的特定组件 - 就像当初从flask import Flask一样
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -25,13 +36,3 @@ docs = text_splitter.split_documents(pages)
 print(f"分割后的文档块数量{len(docs)}")
 print("第一个块的内容预览")
 print(docs[0].page_content)
-"""
-切割方式：
-1. 按页切割
-    - pages = loader.load_and_split()
-2. 按语义段落切割
-    - 将文档切分为 chunk_size 个字符的块，每个字符块之间会有chunk_overlap个字符重复，降低了分离了重要的上下文的可能性
-    - text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=200, chunk_overlap=50, add_start_index=True
-        )
-"""
