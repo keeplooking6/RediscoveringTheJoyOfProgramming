@@ -21,17 +21,10 @@ def log(*args, **kwargs):
     # args[0]是为了检查log的第一个参数是不是函数，类
     if len(args) == 1 and callable(args[0]):
         func = args[0] # 即被装饰函数
-        # 这里是有装饰器参数的情况下，使用第一个参数作为消息
-        message = args[0] if args else None
-        message2 = kwargs if kwargs else None
 
         @wraps(func)
         def wrapper(*args, **kwargs):
-            # 如果有自定义消息，使用它；否则使用函数名
-            if message:
-                print(f"{message},-{message2}")
-            else:
-                print(f"Calling function: {func.__name__}")
+            print(f"Calling function: {func.__name__}")
 
             # 调用原函数
             result = func(*args, **kwargs)
